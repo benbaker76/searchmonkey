@@ -37,7 +37,13 @@ void unrealize_searchNotebook (GtkWidget *widget);
 void realize_menubar (GtkWidget *widget);
 void unrealize_menubar (GtkWidget *widget);
 void realize_statusbar (GtkWidget *widget); /* Auto destroyed */
-
+/* new from 2018 */
+void realize_FileModifiedDialog (GtkWidget *widget);
+void unrealize_FileModifiedDialog (GtkWidget *widget);
+void realize_FileSizeDialog (GtkWidget *widget);
+void unrealize_FileSizeDialog (GtkWidget *widget);
+void realizeButtonString(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
+void unrealizeButtonString(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 /* Generic save/restore commands */
 void realizeFileDialog(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 void unrealizeFileDialog(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
@@ -49,8 +55,10 @@ gboolean realizeFileButton(GtkWidget *widget, GKeyFile *keyString, const gchar *
 void unrealizeFileButton(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 void realizeToggle(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 void unrealizeToggle(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
-void realizeNotebook(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
-void unrealizeNotebook(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
+void realizeSwitch(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
+void unrealizeSwitch(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
+//void realizeNotebook(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
+//void unrealizeNotebook(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 void realizeSpin(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 void unrealizeSpin(GtkWidget *widget, GKeyFile *keyString, const gchar *group, const gchar *name);
 

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Searchmonkey
+Name=Searchmonkey-File search application
+Name[en_GB]=Searchmonkey-File search application
+Name[en_US]=Searchmonkey-File search application
+Name[fr_FR]=Searchmonkey-Application de recherche de fichiers
+Comment=Open source file and plain text search utility
+Comment[fr_FR]=Utilitaire libre de recherche de fichiers et de contenus
+Exec=searchmonkey
+Icon=/usr/share/pixmaps/searchmonkey-48x48.png
+Terminal=false
+Type=Application
+Categories=GNOME;Development;

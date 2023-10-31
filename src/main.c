@@ -24,7 +24,7 @@
 
 GtkWidget *mainWindowApp = NULL; /* Holds pointer to the main window (global) */
 gchar *gConfigFile = NULL; /* created by main(), destroyed by destroyGKeyFile() */
-
+gboolean fStartedSearch = FALSE; /* global in order double or triple "changed" events for treeviews */
 /*
  * Searchmonkey entry point
  */
@@ -45,14 +45,12 @@ int main (int argc, char *argv[])
 #endif
 
   /* Handle GTK command line options and the locale settings */
-  gtk_set_locale ();
+
   gtk_init (&argc, &argv);
 
- /* Initiate threads */
-  if(!g_thread_supported()) /* Luc A janv 2018 ; useless if gtk >=2.32*/
-     g_thread_init (NULL);/* deprecated since 2.32 */
-  gdk_threads_init ();/* deprecated since gtk 3.6 */
-  gdk_threads_enter ();/* id */
+  /* Initiate threads */
+  gdk_threads_init();/* deprecated since gtk 3.6 */
+  gdk_threads_enter();/* id */
 
   /* Create main window, and load (create) ini config file */
   add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps/" PACKAGE); /* New location for all pixmaps */
@@ -70,15 +68,15 @@ int main (int argc, char *argv[])
   tmpStr = g_strdup_printf(_("N/A"));
   g_object_set_data_full(G_OBJECT(mainWindowApp), "notApplicable", tmpStr, g_free);
 
- /* some stuff to launch SearchMonkey with parameters - Luc A Janv 2018 */
+ /* some stuff to launch SearchMonkey with parameters - Luc A - Jan 2018 */
  /* -? = help
     -d = directory
     -f = files
     -t containing text 
- exemple : searchmonkey -d /home/tux -f ODT -t linux
+ example : searchmonkey -d /home/tux -f ODT -t linux
 
 */
-  // g_object_set_data(G_OBJECT(mainWindowApp), "argvParameter1", NULL);        
+       
    while ((opt = getopt(argc, argv, "?d:f:t:")) != -1) 
       {
                switch (opt) {
@@ -110,18 +108,13 @@ int main (int argc, char *argv[])
                    printf("\n----------------\nhow to launch Searchmonkey with parameters :\nsearchmonkey -d {directory} -f {file name} -t {containing text}\nExample :\n searchmonkey -d /home/tux/documents -f txt -t linux\n");
                }
       }/* wend */
- //if(argv[1]!=NULL)
-   // {
-     // printf("** started with %s: **\n", argv[1]);
-     // g_object_set_data(G_OBJECT(mainWindowApp), "argvParameter1", argv[1]);
-  //  }
-  //else g_object_set_data(G_OBJECT(mainWindowApp), "argvParameter1", NULL);
+ 
   /* Show app, and start main loop */
   gtk_widget_show (mainWindowApp);
   gtk_main ();
 
   /* Clean exit */
-  gdk_threads_leave ();/* deprecated since gtk 3.6 */
+  gdk_threads_leave();/* deprecated since gtk 3.6 */
   return 0;
 }
 

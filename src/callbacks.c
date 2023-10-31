@@ -1,6 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
+#include <stdlib.h>
 
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -25,7 +26,7 @@ GtkWidget *fileRegexWizard = NULL;
 GtkWidget *contextRegexWizard = NULL;
 
 void
-on_window1_destroy                     (GtkObject       *object,
+on_window1_destroy                     (GtkWidget       *object,
                                         gpointer         user_data)
 {
   gtk_main_quit();
@@ -85,7 +86,7 @@ on_quit1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
   GObject *window1 = G_OBJECT(lookup_widget(GTK_WIDGET(menuitem), "window1"));
-  gtk_object_destroy(GTK_OBJECT(window1));
+   gtk_widget_destroy(GTK_WIDGET(window1));
 }
 
 
@@ -114,25 +115,30 @@ on_set_font1_activate                  (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
     gchar *newFont;
+    GtkWidget *textView1, *textView4;
     GtkWidget *textView;
     if (getResultsViewHorizontal(GTK_WIDGET(menuitem))) {
       textView = lookup_widget(GTK_WIDGET(menuitem), "textview1");
     } else {
       textView = lookup_widget(GTK_WIDGET(menuitem), "textview4");
     }
+    textView1 = lookup_widget(GTK_WIDGET(menuitem), "textview1");
+    textView4 = lookup_widget(GTK_WIDGET(menuitem), "textview4");
     
-    GtkFontSelectionDialog *dialog = GTK_FONT_SELECTION_DIALOG(create_fontSelectionDialog());
+    GtkFontSelectionDialog *dialog = create_fontSelectionDialog();
     PangoContext* context = gtk_widget_get_pango_context  (textView);
     PangoFontDescription *desc = pango_context_get_font_description(context);    
     newFont = pango_font_description_to_string(desc);
-    
-    gtk_font_selection_dialog_set_font_name(dialog, newFont);
+
+    gtk_font_chooser_set_font (GTK_FONT_CHOOSER(dialog ),newFont);
+
     if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
-      newFont = gtk_font_selection_dialog_get_font_name(dialog);
+      newFont = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(dialog ));
       if (newFont != NULL) { 
         desc = pango_font_description_from_string (newFont);
         if (desc != NULL) {
-          gtk_widget_modify_font (GTK_WIDGET(textView), desc);
+          gtk_widget_modify_font (GTK_WIDGET(textView1), desc);
+          gtk_widget_modify_font (GTK_WIDGET(textView4), desc);
           pango_font_description_free(desc);
         }
         g_free(newFont);
@@ -146,33 +152,39 @@ void
 on_set_highligting_colour1_activate    (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-    GdkColor color, *cp;
-    GtkTextView *textView;
-    if (getResultsViewHorizontal(GTK_WIDGET(menuitem))) {
-      textView = GTK_TEXT_VIEW(lookup_widget(GTK_WIDGET(menuitem), "textview1"));
-    } else {
-      textView = GTK_TEXT_VIEW(lookup_widget(GTK_WIDGET(menuitem), "textview4"));
-    }
-    GtkTextBuffer* textBuf = gtk_text_view_get_buffer (textView);
-    GtkTextTagTable* tagTable = gtk_text_buffer_get_tag_table(textBuf);
-    GtkTextTag* tag = gtk_text_tag_table_lookup(tagTable, "word_highlight");
-    GtkWidget *dialog = create_highlightColourDialog();
-    GtkColorSelection *colorsel = GTK_COLOR_SELECTION(lookup_widget(dialog, "color_selection1"));
+    GdkRGBA color, *cp;
+    GtkTextView *textView1, *textView4;
 
-    g_assert(textView != NULL);
-    g_assert(textBuf != NULL);
-    g_assert(tagTable != NULL);
-    g_assert(tag != NULL);
-    g_assert(dialog != NULL);
-    g_assert(colorsel != NULL);
+    textView1 = GTK_TEXT_VIEW(lookup_widget(GTK_WIDGET(menuitem), "textview1"));
+    textView4 = GTK_TEXT_VIEW(lookup_widget(GTK_WIDGET(menuitem), "textview4"));
     
-    g_object_get( G_OBJECT(tag), "background-gdk", &cp, NULL);
-    gtk_color_selection_set_current_color(colorsel, cp);
-    gdk_color_free(cp);
+    GtkTextBuffer* textBuf1 = gtk_text_view_get_buffer (textView1);
+    GtkTextTagTable* tagTable1 = gtk_text_buffer_get_tag_table(textBuf1);
+    GtkTextTag* tag1 = gtk_text_tag_table_lookup(tagTable1, "word_highlight");
+    GtkTextBuffer* textBuf4 = gtk_text_view_get_buffer (textView4);
+    GtkTextTagTable* tagTable4 = gtk_text_buffer_get_tag_table(textBuf4);
+    GtkTextTag* tag4 = gtk_text_tag_table_lookup(tagTable4, "word_highlight");
+
+    GtkColorChooserDialog *dialog = create_highlightColourDialog();
+
+    g_assert(textView1 != NULL);
+    g_assert(textBuf1 != NULL);
+    g_assert(tagTable1 != NULL);
+    g_assert(tag1 != NULL);
+    g_assert(dialog != NULL);
+    
+    if (getResultsViewHorizontal(GTK_WIDGET(menuitem))) {
+      g_object_get( G_OBJECT(tag1), "background-rgba", &cp, NULL);
+    } else {
+      g_object_get( G_OBJECT(tag4), "background-rgba", &cp, NULL);
+    }
+    
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(dialog), cp);
+    gdk_rgba_free (cp);
     if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
-        GtkColorSelection *colorsel = GTK_COLOR_SELECTION(lookup_widget(dialog, "color_selection1"));
-        gtk_color_selection_get_current_color(colorsel, &color);
-        g_object_set( G_OBJECT(tag), "background-gdk", &color, NULL);
+        gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(dialog), &color);
+        g_object_set( G_OBJECT(tag1), "background-rgba", &color, NULL);
+        g_object_set( G_OBJECT(tag4), "background-rgba", &color, NULL);
     }
     gtk_widget_destroy(dialog);
 }
@@ -193,21 +205,19 @@ on_cl_ear_history1_activate            (GtkMenuItem     *menuitem,
         check = GTK_TOGGLE_BUTTON(lookup_widget(dialog, "clearFileNamesCheck"));
         if(gtk_toggle_button_get_active(check)) {
           clearComboBox2(lookup_widget(GTK_WIDGET(menuitem), "fileName"));
-          clearComboBox2(lookup_widget(GTK_WIDGET(menuitem), "fileName2"));
         }
 
         /* Clear containing text? */
         check = GTK_TOGGLE_BUTTON(lookup_widget(dialog, "clearContainingTextCheck"));
         if(gtk_toggle_button_get_active(check)) {
             clearComboBox(lookup_widget(GTK_WIDGET(menuitem), "containingText"));
-            clearComboBox(lookup_widget(GTK_WIDGET(menuitem), "containingText2"));
         }
 
         /* Clear look in? */
         check = GTK_TOGGLE_BUTTON(lookup_widget(dialog, "clearLookInCheck"));
         if(gtk_toggle_button_get_active(check)) {
             clearComboBox(lookup_widget(GTK_WIDGET(menuitem), "lookIn"));
-            clearComboBox(lookup_widget(GTK_WIDGET(menuitem), "lookIn2"));
+
         }
 
         /* Clear size/modified? */
@@ -248,17 +258,6 @@ on_copy2_activate                      (GtkMenuItem     *menuitem,
 }
 
 
-void
-on_toolbar2_activate                   (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-    GtkWidget *widget = lookup_widget(GTK_WIDGET(menuitem), "toolbar1");
-    if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem))) {
-        gtk_widget_show(widget);
-    } else {
-        gtk_widget_hide(widget);
-    }
-}
 
 
 void
@@ -406,20 +405,24 @@ on_about1_activate                     (GtkMenuItem     *menuitem,
   PangoAttrList *list;
   PangoAttribute *attr;
   
+  gtk_dialog_run(GTK_DIALOG (aboutDialog));  
+  gtk_widget_destroy(GTK_DIALOG (aboutDialog));
+  return;
+}
   /* Set searchmonkey version text and font size */
-  tmpWidget = lookup_widget(aboutDialog, "aboutVersion");
-  tmpString = g_strdup_printf(_("searchmonkey %s"), VERSION);/* defined in "configure" line 1644 - luc A 3 janv 2018 */
-  gtk_label_set_text(GTK_LABEL(tmpWidget), tmpString);
-  g_free(tmpString);
-  list = pango_attr_list_new(); /* Create list with 1 reference */
-  attr = pango_attr_scale_new(PANGO_SCALE_X_LARGE);
-  pango_attr_list_change(list, attr); /* pango_attr_list_insert */
-  gtk_label_set_attributes(GTK_LABEL(tmpWidget), list);
-  pango_attr_list_unref(list); /* Destroy 1 attribute, plus list */
+//  tmpWidget = lookup_widget(aboutDialog, "aboutVersion");
+ // tmpString = g_strdup_printf(_("searchmonkey %s"), VERSION);/* defined in "configure" line 1644 - luc A 3 janv 2018 */
+ // gtk_label_set_text(GTK_LABEL(tmpWidget), tmpString);
+ // g_free(tmpString);
+//  list = pango_attr_list_new(); /* Create list with 1 reference */
+ // attr = pango_attr_scale_new(PANGO_SCALE_X_LARGE);
+ // pango_attr_list_change(list, attr); /* pango_attr_list_insert */
+ // gtk_label_set_attributes(GTK_LABEL(tmpWidget), list);
+ // pango_attr_list_unref(list); /* Destroy 1 attribute, plus list */
 
   /* Start widget */
-  gtk_widget_show(aboutDialog);
-}
+ // gtk_widget_show(aboutDialog);
+
 
 
 void
@@ -445,11 +448,8 @@ on_containingText_changed              (GtkComboBox     *combobox,
 {
   GtkToggleButton *checkBox;
 
-  if (getExpertSearchMode(GTK_WIDGET(combobox)) == TRUE) {
-    checkBox = GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(combobox), "containingTextCheck"));
-  } else {
-    checkBox = GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(combobox), "containingTextCheck2"));
-  }
+ 
+  checkBox = GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(combobox), "containingTextCheck"));
 
   gchar *test = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(combobox));
 
@@ -484,12 +484,9 @@ on_folderSelector_clicked              (GtkButton       *button,
     gchar *filename;
     
     filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-    if (getExpertSearchMode(GTK_WIDGET(button)) == TRUE) {
-    	fileWidget = GTK_COMBO_BOX(lookup_widget(GTK_WIDGET(button), "lookIn"));
-    } else {
-    	fileWidget = GTK_COMBO_BOX(lookup_widget(GTK_WIDGET(button), "lookIn2"));
-    }
+    fileWidget = GTK_COMBO_BOX(lookup_widget(GTK_WIDGET(button), "lookIn"));
     addUniqueRow(GTK_WIDGET(fileWidget), filename);
+    gtk_widget_set_tooltip_text (GTK_WIDGET(lookup_widget(GTK_WIDGET(button), "lookIn")),filename ); 
     g_free (filename);
   }
   gtk_widget_destroy (dialog);
@@ -534,20 +531,6 @@ on_afterCheck_toggled                  (GtkToggleButton *togglebutton,
 }
 
 
-void
-on_expertUserCheck_toggled             (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-  GtkWidget *menuitem;
-
-  if (gtk_toggle_button_get_active(togglebutton)) { /* Set expert mode */
-    gtk_notebook_set_current_page(GTK_NOTEBOOK(lookup_widget(GTK_WIDGET(togglebutton), "searchNotebook")), 1);
-  } else { /* Set basic mode */
-    gtk_notebook_set_current_page(GTK_NOTEBOOK(lookup_widget(GTK_WIDGET(togglebutton), "searchNotebook")), 0);
-  }
-}
-
-
 gboolean
 on_treeview1_button_press_event        (GtkWidget       *widget,
                                         GdkEventButton  *event,
@@ -580,7 +563,7 @@ on_treeview1_button_press_event        (GtkWidget       *widget,
      }/* if test path at pos OK */   
     else return FALSE;
    }/* endif right-click */ 
-/* capture double-click */
+ /* capture double-click */
  if ((event->button == 1) && (event->type == GDK_2BUTTON_PRESS) && (gtk_tree_selection_count_selected_rows(selection)==1 )) 
    {
      if (gtk_tree_view_get_path_at_pos (treeview,event->x, event->y,
@@ -596,7 +579,7 @@ on_treeview1_button_press_event        (GtkWidget       *widget,
       }/* endif at pos */
     }/* endif double-click */
    
-/* capture simple-left-click, i.e. select a row */
+ /* capture simple-left-click, i.e. select a row */
  if ((event->button == 1) && (event->type == GDK_BUTTON_PRESS)  && (gtk_tree_selection_count_selected_rows(selection)==1 )) 
    {
      if (gtk_tree_view_get_path_at_pos (treeview,event->x, event->y,
@@ -608,9 +591,7 @@ on_treeview1_button_press_event        (GtkWidget       *widget,
                gtk_tree_selection_select_path (selection, path);
                if (path!=NULL) 
                 {
-		 // printf("* avant libère mémoire *\n");
-                 gtk_tree_path_free(path);
-                 // printf("* après libère mémoire *\n");
+                 gtk_tree_path_free(path);                 
                 }    
               return TRUE;
              }
@@ -656,8 +637,7 @@ void
 on_copy3_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-  copyFile(GTK_WIDGET(menuitem));
-    
+  copyFile(GTK_WIDGET(menuitem));    
   detachMenu(menuitem);
 }
 
@@ -764,6 +744,7 @@ on_expWizard_response                  (GtkDialog       *dialog,
         case GTK_RESPONSE_OK:
             finalRegex = (gchar *)gtk_entry_get_text(output);/* read text in Wizard dialog, resulting formula */
             if (*finalRegex != '\0') {
+printf("tentative regex\n");
                 addUniqueRow(GTK_WIDGET(retCombo), finalRegex);/* modify combobox in main window */
             }
             /* Do not break here! We want the widget to be destroyed! */
@@ -1314,37 +1295,6 @@ on_vertical_results1_activate          (GtkMenuItem     *menuitem,
 }
 
 
-void
-on_importCriteria_clicked              (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-  importCriteria(GTK_WIDGET(toolbutton));
-}
-
-
-void
-on_exportCriteria_clicked              (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-  exportCriteria(GTK_WIDGET(toolbutton));
-}
-
-
-void
-on_saveResults_clicked                 (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-  saveResults(GTK_WIDGET(toolbutton));
-}
-
-
-void
-on_printResults_clicked                (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-
-}
-
 
 void
 on_newInstance2_clicked                (GtkToolButton   *toolbutton,
@@ -1353,21 +1303,6 @@ on_newInstance2_clicked                (GtkToolButton   *toolbutton,
   spawnNewSearchmonkey();
 }
 
-
-void
-on_playButton2_clicked                 (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-  start_search_thread(GTK_WIDGET(toolbutton));
-}
-
-
-void
-on_stopButton2_clicked                 (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
-{
-  stop_search_thread(GTK_WIDGET(toolbutton));
-}
 
 
 void
@@ -1385,43 +1320,6 @@ on_stopButton_clicked                  (GtkButton       *button,
   stop_search_thread(GTK_WIDGET(button));
 }
 
-
-void
-on_searchNotebook_switch_page          (GtkNotebook     *notebook,
-                                        GtkNotebookPage *page,
-                                        guint            page_num,
-                                        gpointer         user_data)
-{
-  guint old_page_num = gtk_notebook_get_current_page(notebook);
-  
-  if (old_page_num == 0) { /* If leaving basic mode - save settings */
-    setExpertSearchMode(GTK_WIDGET(notebook), TRUE);
-  } else if (old_page_num == 1) { /* If leaving expert mode - save settings */
-    setExpertSearchMode(GTK_WIDGET(notebook), FALSE);
-  } else {
-    if (page_num == 0) { /* If going to basic mode - restore settings */
-      setExpertSearchMode(GTK_WIDGET(notebook), FALSE);
-    } else if (page_num == 1) { /* If going to expert mode - restore settings */
-      setExpertSearchMode(GTK_WIDGET(notebook), TRUE);
-    }
-  }
-}
-
-
-void
-on_aboutSearchmonkey_response          (GtkDialog       *dialog,
-                                        gint             response_id,
-                                        gpointer         user_data)
-{
-  GtkWidget *creditsDialog;
-  
-  if (response_id == GTK_RESPONSE_OK) { /* Show credits */
-    creditsDialog = create_creditsDialog();
-    gtk_widget_show(creditsDialog);
-  } else { /* Otherwise destroy about box */
-    gtk_widget_destroy(GTK_WIDGET(dialog));
-  }
-}
 
 
 void
@@ -1516,7 +1414,14 @@ on_dosExpressionRadioFile_clicked      (GtkButton       *button,
                                         gpointer         user_data)
 {
   GtkStatusbar *statusbar = GTK_STATUSBAR(lookup_widget(GTK_WIDGET(button), "statusbar1"));
-
+  gchar *tmpstr;
+  const gint tmpLimit = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(GTK_WIDGET(button), "maxHitsSpinResults")));
+  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(button), "limitResultsCheckResults")))) {
+       tmpstr= g_strdup_printf(_("/Max hits limit:%d"), tmpLimit);
+  }
+  else {
+       tmpstr=  g_strdup_printf(_("/No Max hits limit"));
+  }
 
   if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button))) {
     changeModel(GTK_WIDGET(button), "regex", "noregex");
@@ -1525,10 +1430,11 @@ on_dosExpressionRadioFile_clicked      (GtkButton       *button,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lookup_widget(GTK_WIDGET(button), "dosExpressionRadioFile"))))
     {        
         gtk_statusbar_push(statusbar, STATUSBAR_CONTEXT_ID(statusbar),
-                     _("research mode with jokers(DOS like)"));
+                     g_strdup_printf(_("%s/research mode with jokers(DOS like)"), tmpstr));
     }
   else  gtk_statusbar_push(statusbar, STATUSBAR_CONTEXT_ID(statusbar),
-                     _("research mode with RegEx")); 
+                     g_strdup_printf(_("%s/research mode with RegEx"), tmpstr)); 
+  g_free(tmpstr);
 }
 
 
@@ -1541,14 +1447,79 @@ on_regularExpressionRadioFile_clicked  (GtkButton       *button,
   }
 }
 
+void
+on_IntervalStartBtn_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  GDate date_interval1, date_interval2;
+  gboolean fErrDateInterval1 = FALSE;
+  gboolean fErrDateInterval2 = FALSE;
+  GtkWidget *dateEntry = lookup_widget(GTK_WIDGET(button), "intervalStartEntry");
+  gchar* newDate = getDate(gtk_button_get_label(dateEntry), lookup_widget(GTK_WIDGET(button), "window1"));
+  gtk_button_set_label(dateEntry, newDate);
+
+ /* we must check if dates aren't inverted */
+
+  gchar *endDate=NULL;
+  endDate = gtk_button_get_label(lookup_widget(GTK_WIDGET(button), "intervalEndEntry"));
+  g_date_set_parse(&date_interval1, newDate);
+  g_date_set_parse(&date_interval2, endDate);
+  fErrDateInterval1 = g_date_valid(&date_interval1);
+  if(!fErrDateInterval1)
+      printf("Internal erreor date Interv 1\n");
+  fErrDateInterval2 = g_date_valid(&date_interval2);  
+  if(!fErrDateInterval2)
+      printf("Internal error date Interv 2\n");
+  gint cmp_date = g_date_compare (&date_interval1,&date_interval2);
+  if(cmp_date>0)
+    {
+       miscErrorDialog(lookup_widget(GTK_WIDGET(button), "window1"), _("<b>Error!</b>\n\nDates mismatch ! 'Before than' date must be <i>more recent</i> than 'After than' date.\n\nPlease check the dates."));
+       gtk_button_set_label(lookup_widget(GTK_WIDGET(button), "intervalStartEntry"), endDate);
+    }
+
+  g_free(newDate);
+  //g_free(endDate);
+}
+
+void
+on_IntervalEndBtn_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  GDate date_interval1, date_interval2;
+  gboolean fErrDateInterval1 = FALSE;
+  gboolean fErrDateInterval2 = FALSE;
+  GtkWidget *dateEntry = lookup_widget(GTK_WIDGET(button), "intervalEndEntry");
+  gchar* newDate = getDate(gtk_button_get_label(dateEntry), lookup_widget(GTK_WIDGET(button), "window1"));
+  gtk_button_set_label(dateEntry, newDate);
+
+ /* we must check if dates aren't inverted */
+  gchar *startDate=NULL;
+  startDate = gtk_button_get_label(lookup_widget(GTK_WIDGET(button), "intervalStartEntry"));
+  g_date_set_parse(&date_interval1, startDate);
+  g_date_set_parse(&date_interval2, newDate);
+  fErrDateInterval1 = g_date_valid(&date_interval1);
+  if(!fErrDateInterval1)
+      printf("Internal error date Interv 1\n");
+  fErrDateInterval2 = g_date_valid(&date_interval2);  
+  if(!fErrDateInterval2)
+      printf("Internal error date Interv 2\n");
+  gint cmp_date = g_date_compare (&date_interval1,&date_interval2);
+  if(cmp_date>0)
+    {
+       miscErrorDialog(lookup_widget(GTK_WIDGET(button), "window1"), _("<b>Error!</b>\n\nDates mismatch ! 'Before than' date must be <i>more recent</i> than 'After than' date.\n\nPlease check the dates."));
+       gtk_button_set_label(lookup_widget(GTK_WIDGET(button), "intervalEndEntry"), startDate);
+    }
+
+  g_free(newDate);
+}
 
 void
 on_afterCalenderBtn_clicked            (GtkButton       *button,
                                         gpointer         user_data)
 {
-  GtkEntry *dateEntry = GTK_ENTRY(lookup_widget(GTK_WIDGET(button), "afterEntry"));
-  gchar* newDate = getDate(gtk_entry_get_text(dateEntry));
-  gtk_entry_set_text(dateEntry, newDate);
+  GtkWidget *dateEntry = lookup_widget(GTK_WIDGET(button), "afterEntry");
+  gchar* newDate = getDate(gtk_button_get_label(dateEntry), lookup_widget(GTK_WIDGET(button), "window1"));
+  gtk_button_set_label(dateEntry, newDate);
   g_free(newDate);
 }
 
@@ -1557,9 +1528,9 @@ void
 on_beforeCalendatBtn_clicked           (GtkButton       *button,
                                         gpointer         user_data)
 {
-  GtkEntry *dateEntry = GTK_ENTRY(lookup_widget(GTK_WIDGET(button), "beforeEntry"));
-  gchar* newDate = getDate(gtk_entry_get_text(dateEntry));
-  gtk_entry_set_text(dateEntry, newDate);
+  GtkWidget *dateEntry = lookup_widget(GTK_WIDGET(button), "beforeEntry");
+  gchar* newDate = getDate(gtk_button_get_label(dateEntry),lookup_widget(GTK_WIDGET(button), "window1"));
+  gtk_button_set_label(dateEntry, newDate);
   g_free(newDate);
 }
 
@@ -1587,6 +1558,36 @@ on_MoreThanSize_focus_out_event         (GtkWidget       *widget,
   return FALSE;
 }
 
+gboolean on_folder_focus_out_event(GtkWidget       *widget,
+                                        GdkEventFocus   *event,
+                                        gpointer         user_data)
+{
+ gchar *filename;
+
+ filename = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(widget));
+ /* we must change the tooltip */
+ gtk_widget_set_tooltip_text (GTK_WIDGET(lookup_widget(GTK_WIDGET(widget), "lookIn")),filename ); 
+ return FALSE;
+}
+
+gboolean  on_folder_query_tooltip_event(GtkWidget  *widget,
+               gint        x,
+               gint        y,
+               gboolean    keyboard_mode,
+               GtkTooltip *tooltip,
+               gpointer    user_data)
+{
+ gchar *filename;
+
+ filename = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(widget));
+ /* we must change the tooltip */
+ gtk_tooltip_set_markup (GTK_TOOLTIP(tooltip),g_strconcat(_("<b><u>Look in :</u></b>\n") ,filename, NULL) ); 
+ gtk_tooltip_set_icon_from_icon_name (GTK_TOOLTIP(tooltip),
+                                     "gtk-open",
+                                     GTK_ICON_SIZE_DIALOG);
+ 
+ return TRUE;
+}
 
 gboolean
 on_regexp_focus_out_event              (GtkWidget       *widget,
@@ -1639,8 +1640,26 @@ void
 on_limitResultsCheckResults_toggled    (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
+  gchar *tmpstr;
   gboolean active = gtk_toggle_button_get_active(togglebutton);
+  GtkStatusbar *statusbar = GTK_STATUSBAR(lookup_widget(GTK_WIDGET(togglebutton), "statusbar1"));
   gtk_widget_set_sensitive(lookup_widget(GTK_WIDGET(togglebutton), "limit_results_hbox"), active);
+
+  const gint tmpLimit = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(GTK_WIDGET(togglebutton), "maxHitsSpinResults")));
+  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(togglebutton), "limitResultsCheckResults")))) {
+       tmpstr= g_strdup_printf(_("/Max hits limit:%d"), tmpLimit);
+  }
+  else {
+       tmpstr=  g_strdup_printf(_("/No Max hits limit"));
+  }
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lookup_widget(GTK_WIDGET(togglebutton), "dosExpressionRadioFile"))))
+    {        
+        gtk_statusbar_push(statusbar, STATUSBAR_CONTEXT_ID(statusbar),
+                     g_strdup_printf(_("%s/research mode with jokers(DOS like)"), tmpstr));
+    }
+  else  gtk_statusbar_push(statusbar, STATUSBAR_CONTEXT_ID(statusbar),
+                     g_strdup_printf(_("%s/research mode with RegEx"), tmpstr)); 
+  g_free(tmpstr);
 }
 
 
@@ -1652,22 +1671,6 @@ on_showLinesCheckResults_toggled       (GtkToggleButton *togglebutton,
   gtk_widget_set_sensitive(lookup_widget(GTK_WIDGET(togglebutton), "show_line_contents_hbox"), active);
 }
 
-
-gboolean
-on_searchNotebook_focus_out_event      (GtkWidget       *widget,
-                                        GdkEventFocus   *event,
-                                        gpointer         user_data)
-{
-  GtkWidget *notebook = lookup_widget(widget, "searchNotebook");
-  guint old_page_num = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
-  
-  if (old_page_num == 0) { /* If currently showing basic mode - then save these settings  */
-    setExpertSearchMode(notebook, TRUE);
-  } else { /* Otherwise use expert settings as the default */
-    setExpertSearchMode(notebook, FALSE);
-  }
-  return FALSE;
-}
 
 
 void
@@ -1711,3 +1714,182 @@ on_autoComplete_response               (GtkDialog       *dialog,
   gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
+/*************************************************
+ callback : change the preview according to 
+ current value in the 'entrySince'
+ spinButton
+*************************************************/
+gboolean on_entrySince_value_changed_event   (GtkWidget       *widget,
+                                        GdkEventFocus   *event,
+                                        gpointer         user_data)
+{
+  gchar *test = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(lookup_widget(GTK_WIDGET(widget), "sinceUnits")));
+
+  g_free(test);
+  return FALSE;
+}
+
+/**********************************************
+ a function to retrieve the current ACTIVE
+  radio button 
+ in the Modified date dialog
+***********************************************/
+void radio_button_selected (GtkWidget *widget, gpointer data) 
+{
+  gint i, j;
+  GSList *group;
+  GtkWidget *buttonAfter;
+  GtkWidget *buttonBefore;
+  GtkWidget *gridSince;
+  GtkWidget *buttonInterval1;
+  GtkWidget *buttonInterval2;
+  gchar *val_spin;
+
+    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+       group  = gtk_radio_button_get_group (GTK_RADIO_BUTTON (widget));
+       i =  g_slist_index (group, widget);
+    }
+
+  /* now we deactivate options for all OTHERS lines of Widgets */
+  buttonAfter = GTK_BUTTON(lookup_widget(GTK_WIDGET(widget), "afterEntry"));/* code 3*/
+  buttonBefore = GTK_BUTTON(lookup_widget(GTK_WIDGET(widget), "beforeEntry"));/* code 2 */
+  gridSince = lookup_widget(GTK_WIDGET(widget), "gridSince");/* code 0 */
+  buttonInterval1 = GTK_BUTTON(lookup_widget(GTK_WIDGET(widget), "intervalStartEntry"));/* code 1 */
+  buttonInterval2 = GTK_BUTTON(lookup_widget(GTK_WIDGET(widget), "intervalEndEntry"));
+  gtk_widget_set_sensitive (buttonAfter, FALSE);
+  gtk_widget_set_sensitive (buttonBefore, FALSE);
+  gtk_widget_set_sensitive (gridSince, FALSE);
+  gtk_widget_set_sensitive (buttonInterval1, FALSE);
+  gtk_widget_set_sensitive (buttonInterval2, FALSE);
+
+  switch(i) {
+     case 0:{ gtk_widget_set_sensitive (gridSince, TRUE);
+              gchar *test = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT( lookup_widget(GTK_WIDGET(widget), "sinceUnits")  ));
+              val_spin = g_strdup_printf("%d", 
+                             gtk_spin_button_get_value_as_int(
+                                   GTK_SPIN_BUTTON(lookup_widget(GTK_WIDGET(widget), "entrySince")) ) );
+              g_free(test);
+              g_free(val_spin);
+              break;}
+     case 1:{gtk_widget_set_sensitive (buttonInterval1, TRUE);  
+             gtk_widget_set_sensitive (buttonInterval2, TRUE);
+             break;}
+     case 2:{gtk_widget_set_sensitive (buttonBefore, TRUE);
+              break;}
+     case 3:{gtk_widget_set_sensitive (buttonAfter, TRUE);             
+            break;}
+     case 4:{break;}
+     case 5:{break;}
+     default:{break;}
+  }/* end switch */
+}
+
+
+void
+on_radiobuttonAll_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+  radio_button_selected(button, NULL);
+}
+
+void
+on_radiobuttonToday_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+  radio_button_selected(button, NULL);
+
+}
+
+void
+on_radiobuttonAfter_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  radio_button_selected(button, NULL);
+}
+
+void
+on_radiobuttonBefore_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  radio_button_selected(button, NULL);
+}
+
+void
+on_radiobuttonInterval_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  radio_button_selected(button, NULL);
+}
+
+void
+on_radiobuttonSince_toggled      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  radio_button_selected(button, NULL);
+}
+
+
+/*******************************************
+ on function to catch the file size and 
+ modified date expander changing
+******************************************/
+void expander_callback (GObject    *object,
+                   GParamSpec *param_spec,
+                   gpointer    user_data)
+{
+  GtkExpander *expander;
+  GtkLabel *label;
+  GtkWidget *iconExp;
+  GtkWidget *gridExp;
+
+  expander = GTK_EXPANDER (object);
+  label =  GTK_LABEL(lookup_widget(GTK_WIDGET(expander), "label_expander"));
+  iconExp = lookup_widget(GTK_WIDGET(expander), "iconExpander");
+  gridExp = lookup_widget(GTK_WIDGET(expander), "gridExpander");
+
+  if (gtk_expander_get_expanded (expander))
+    {
+      /* we draw the title horizontally */
+      gtk_label_set_angle(label, 0);
+      /* we move the image */
+      g_object_ref(iconExp); /* it's a kind of Push to preserve the object */
+      gtk_container_remove(GTK_CONTAINER(gridExp), iconExp); /* it isn't destroyed due to the previous g_object_ref */
+      gtk_grid_attach(GTK_GRID(gridExp), iconExp ,1,0,1,1);
+      g_object_unref(iconExp);/* POP */
+    }
+  else
+    {
+      /* we draw the title vertically */
+       gtk_label_set_angle(label, 90);
+     /* we move the image */
+      g_object_ref(iconExp); /* it's a kind of Push to preserve the object */
+      gtk_container_remove(GTK_CONTAINER(gridExp), iconExp); /* it isn't destroyed due to the previous g_object_ref */
+      gtk_grid_attach(GTK_GRID(gridExp), iconExp ,0,1,1,1);
+      g_object_unref(iconExp);/* POP */
+    }
+}
+
+/***********************************
+ change in the advanced mode switch
+***********************************/
+void on_advancedMode_event(GtkSwitch *widget,
+               gpointer   user_data)
+{
+   GtkWidget *expander = lookup_widget(GTK_WIDGET(widget), "expander_options");
+   GtkWidget *btnWizar1 = lookup_widget(GTK_WIDGET(widget), "regExpWizard1");
+   GtkWidget *btnWizar2 = lookup_widget(GTK_WIDGET(widget), "regExpWizard2");
+
+   if(gtk_switch_get_active (GTK_SWITCH(widget))) {
+       gtk_widget_set_sensitive(GTK_WIDGET(expander) , TRUE);
+       gtk_widget_set_sensitive(GTK_WIDGET(btnWizar1) , TRUE);
+       gtk_widget_set_sensitive(GTK_WIDGET(btnWizar2) , TRUE);
+   }
+   else {
+    gtk_expander_set_expanded (GTK_EXPANDER(expander), FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(expander) , FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(btnWizar1) , FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(btnWizar2) , FALSE);
+   }
+}

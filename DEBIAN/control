@@ -1,0 +1,10 @@
+Package: searchmonkey
+Version: 0.8-3
+Section: base
+Priority: optional
+Architecture: x86_x64
+Dependends: libzip (>=1.0), glib (>=2.0)
+Maintainer: Adam <searchmonkey@embeddediq.com>
+Description: Graphical equivalent to find+grep
+  Provides desktop searching with the power
+  of Regular Expressions (RegEx) for all users

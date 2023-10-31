@@ -1,0 +1,1694 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-26 16:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: savestate.c:1859
+#, c-format
+msgid ""
+"\n"
+"Internal error %d! Unable to highlight line - offset beyond line-end.\n"
+msgstr ""
+
+#: main.c:68
+msgid ""
+"\n"
+"No content searching performed for this file.\n"
+"\n"
+"Please ensure containing search was enabled, and that an expression was "
+"entered prior to starting search.\n"
+msgstr ""
+
+#: savestate.c:1864
+#, c-format
+msgid "  Debug: %d) '%s'\n"
+msgstr ""
+
+#: savestate.c:1861
+#, c-format
+msgid "  Debug: fn='%s'\n"
+msgstr ""
+
+#: savestate.c:1862
+#, c-format
+msgid "  Debug: tc=%d + os=%d || oe=%d\n"
+msgstr ""
+
+#: savestate.c:44
+#, c-format
+msgid " %s settings auto-generated - Do not edit!"
+msgstr ""
+
+#: search.c:2818
+msgid " [cancelled]"
+msgstr ""
+
+#: search.c:2811
+msgid " [inv]"
+msgstr ""
+
+#: savestate.c:183
+msgid " [missing]"
+msgstr ""
+
+#: misc.c:97
+msgid " and before "
+msgstr ""
+
+#: misc.c:141
+msgid " and before  "
+msgstr ""
+
+#: search.c:2707
+#, c-format
+msgid "%1.1f KB"
+msgstr ""
+
+#: search.c:2709
+#, c-format
+msgid "%1.1f MB"
+msgstr ""
+
+#: interface.c:2547
+#, c-format
+msgid "%d"
+msgstr ""
+
+#: search.c:2705
+#, c-format
+msgid "%d bytes"
+msgstr ""
+
+#: search.c:2806
+#, c-format
+msgid "%d file found"
+msgstr ""
+
+#: search.c:2808
+#, c-format
+msgid "%d files found"
+msgstr ""
+
+#: interface.c:2540 interface.c:2554
+#, c-format
+msgid "%f"
+msgstr ""
+
+#: search.c:2188
+#, c-format
+msgid "%s %s\n"
+msgstr ""
+
+#: systemio.c:1205
+#, c-format
+msgid "%s Error! Unable to duplicate string vector\n"
+msgstr ""
+
+#: systemio.c:1196
+#, c-format
+msgid "%s Error! Unable to split %s with %c\n"
+msgstr ""
+
+#: search.c:2736
+#, c-format
+msgid "%s-type"
+msgstr ""
+
+#: savestate.c:345 search.c:1647 search.c:1662 search.c:1679 search.c:1684
+#: search.c:1702 search.c:1733 search.c:1743
+#, c-format
+msgid "%x"
+msgstr ""
+
+#: callbacks.c:1015
+msgid "(Entry)"
+msgstr ""
+
+#: callbacks.c:1020
+msgid "(Repeat)"
+msgstr ""
+
+#: callbacks.c:1010
+msgid "(Type)"
+msgstr ""
+
+#: savestate.c:334 savestate.c:476
+#, c-format
+msgid ""
+"* warning ! Corrupted config.ini configuration file ; the <<%s>> key is "
+"absent. I set up a default value *\n"
+msgstr ""
+
+#: interface.c:2650
+msgid ","
+msgstr ""
+
+#: search.c:2826
+msgid "-research mode with RegEx"
+msgstr ""
+
+#: search.c:2823
+msgid "-research mode with jokers(DOS like)"
+msgstr ""
+
+#: savestate.c:1969
+msgid ".\n"
+msgstr ""
+
+#: callbacks.c:1145
+msgid "0%"
+msgstr ""
+
+#: systemio.c:599
+msgid "100%"
+msgstr ""
+
+#: interface.c:1905
+msgid "<Copy and paste your sample text here>"
+msgstr ""
+
+#: interface.c:1097
+msgid "<b>  Search filters  </b>"
+msgstr ""
+
+#: interface.c:3523
+msgid ""
+"<b><big>Date filters settings</big></b>\n"
+"Here you can setup various date settings in order to refine yours searches.\n"
+"- choose <i>after</i> in order to filter files newer than this date.\n"
+"- choose <i>before</i> in order to filter files older than this date.\n"
+"- you can combine <i>after</i> and <i>before</i> settings."
+msgstr ""
+
+#: callbacks.c:1592
+msgid "<b><u>Look in :</u></b>\n"
+msgstr ""
+
+#: interface.c:3688
+msgid ""
+"<b>Choose files size options:</b>\n"
+"If you don't want to limit the search, <i>uncheck</i> all options.\n"
+"In other cases, check one of the options, if you only want to search files "
+"lower or greater than a size.\n"
+"Check the <i>two</i> options if you want to find files <i>only</i> in a size "
+"interval."
+msgstr ""
+
+#: callbacks.c:1484 callbacks.c:1517
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Before than' date must be <i>more recent</i> than 'After "
+"than' date.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: search.c:1762
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Before than' date must be <i>more recent</i> than 'After "
+"than' date.\n"
+"<b>Search can't proceed correctly !</b>\n"
+"Please check the dates."
+msgstr ""
+
+#: search.c:1659
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Invalid 'After'date - format as dd/mm/yyyy or dd mmm yy."
+msgstr ""
+
+#: search.c:1676
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Invalid 'Before' date - format as dd/mm/yyyy or dd mmm yy."
+msgstr ""
+
+#: search.c:1698
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Invalid 'Interval'date(s) - format as dd/mm/yyyy or dd mmm yy."
+msgstr ""
+
+#: search.c:1622
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"LessThan file size must be <i>positive</i> value\n"
+"So this criteria will not be used.\n"
+"\n"
+"Please, check your entry and the units."
+msgstr ""
+
+#: search.c:1603
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"MoreThan file size must be <i>positive</i> value\n"
+"So this criteria will not be used.\n"
+"\n"
+"Please, check your entry and the units."
+msgstr ""
+
+#: search.c:1607 search.c:1626
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"MoreThan file size must be <i>stricly inferior</i> to LessThan file size.So "
+"this criteria will not be used.\n"
+"\n"
+"Please, check your entry and the units."
+msgstr ""
+
+#: interface.c:3187
+msgid "<b>Export Source</b>"
+msgstr ""
+
+#: interface.c:3220
+msgid "<b>Export Type</b>"
+msgstr ""
+
+#: interface.c:897
+msgid "<b>File Contents Options</b>"
+msgstr ""
+
+#: interface.c:853
+msgid "<b>File Name Options</b>"
+msgstr ""
+
+#: interface.c:628
+msgid "<b>Files:</b>"
+msgstr ""
+
+#: interface.c:695
+msgid "<b>Folders:</b>"
+msgstr ""
+
+#: interface.c:3005
+msgid "<b>Import Location</b>"
+msgstr ""
+
+#: interface.c:3038
+msgid "<b>Import Type</b>"
+msgstr ""
+
+#: interface.c:3526
+msgid "<b>Modified :</b>"
+msgstr ""
+
+#: interface.c:2254
+msgid "<b>Resulting expression</b>"
+msgstr ""
+
+#: interface.c:994
+msgid "<b>Results Options</b>"
+msgstr ""
+
+#: interface.c:1887
+msgid "<b>Sample Text:</b>"
+msgstr ""
+
+#: interface.c:1722
+msgid ""
+"<b>Select which data to delete:</b>\n"
+"With this dialog, you can control how your entries will be cleared."
+msgstr ""
+
+#: interface.c:3692
+msgid "<b>Size :</b>"
+msgstr ""
+
+#: interface.c:1925
+msgid "<b>Status:</b>"
+msgstr ""
+
+#: interface.c:1874
+msgid "<b>Test Expression</b>:"
+msgstr ""
+
+#: interface.c:1859
+msgid ""
+"<b>Test Regular Expressions (RegEx):</b>\n"
+"<i>With this dialog, you can test a RegEx before using it.\n"
+"Feel free to type a RegEx and put an example of text to test it.</i>"
+msgstr ""
+
+#: interface.c:2046
+msgid "<b>Text begins:</b>"
+msgstr ""
+
+#: interface.c:2176
+msgid "<b>Text contains</b>"
+msgstr ""
+
+#: interface.c:2190
+msgid "<b>Text ends:</b>"
+msgstr ""
+
+#: interface.c:3437
+msgid "<b>Today :</b>"
+msgstr ""
+
+#: interface.c:1772
+msgid "<b>Warning</b>: Once cleared, history cannot be recovered!"
+msgstr ""
+
+#: interface.c:3719
+msgid "<b>and/or </b>"
+msgstr ""
+
+#: interface.c:3585
+msgid "<i>and ending</i>"
+msgstr ""
+
+#: interface.c:3577
+msgid "<i>starting</i>"
+msgstr ""
+
+#: interface.c:648
+msgid ""
+"<span face=\"Arial\" foreground=\"#670099\"><b>Reg</b></span><span face="
+"\"Arial\" foreground=\"#FF6600\"><b>Ex</b></span>..."
+msgstr ""
+
+#: interface.c:678
+msgid ""
+"<span face=\"Arial\"foreground=\"#670099\"><b>Reg</b></span><span face="
+"\"Arial\"foreground=\"#FF6600\"><b>Ex</b></span>..."
+msgstr ""
+
+#: search.c:2748
+msgid "?"
+msgstr ""
+
+#: systemio.c:240
+#, c-format
+msgid ""
+"A file named \"%s\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: search.c:1941
+msgid "Aborting research-Searchmonkey"
+msgstr ""
+
+#: savestate.c:145
+msgid "About to overwrite save configuration. Do you want to proceed?"
+msgstr ""
+
+#: interface.c:2280
+msgid "Accept the resulting expression, and add it to the search rules."
+msgstr ""
+
+#: interface.c:2152
+msgid "Add"
+msgstr ""
+
+#: interface.c:760
+msgid "Advanced mode :"
+msgstr ""
+
+#: interface.c:769
+msgid "Advanced options"
+msgstr ""
+
+#: misc.c:97
+msgid "After"
+msgstr ""
+
+#: misc.c:101 misc.c:139 misc.c:141
+msgid "After "
+msgstr ""
+
+#: interface.c:2058 interface.c:2107 interface.c:2202
+msgid "Any char except these"
+msgstr ""
+
+#: interface.c:2055 interface.c:2104 interface.c:2199
+msgid "Any character"
+msgstr ""
+
+#: misc.c:105 misc.c:145
+msgid "Any date"
+msgstr ""
+
+#: interface.c:2061 interface.c:2110 interface.c:2205
+msgid "Any numeric character"
+msgstr ""
+
+#: interface.c:2057 interface.c:2106 interface.c:2201
+msgid "Any one of these chars"
+msgstr ""
+
+#: interface.c:2062 interface.c:2111 interface.c:2206
+msgid "Any text character"
+msgstr ""
+
+#: callbacks.c:1173
+msgid ""
+"Are you sure that you wish to delete the config file, and restart "
+"searchmonkey?"
+msgstr ""
+
+#: systemio.c:851
+#, c-format
+msgid ""
+"Are you sure you want to delete:\n"
+"\t'%s'"
+msgstr ""
+
+#: interface.c:3365
+msgid "Artwork:"
+msgstr ""
+
+#: interface.c:2532
+msgid "Attributes"
+msgstr ""
+
+#: interface.c:3286
+msgid "Auto Complete"
+msgstr ""
+
+#: interface.c:2599
+msgid "Auto search..."
+msgstr ""
+
+#: interface.c:491
+msgid "Auto-size columns"
+msgstr ""
+
+#: misc.c:99 misc.c:137
+msgid "Before "
+msgstr ""
+
+#: interface.c:2528
+msgid "Binary/Executable"
+msgstr ""
+
+#: interface.c:741
+msgid "Browse your file system and select the search directory..."
+msgstr ""
+
+#: interface.c:1606
+msgid "C_ancel"
+msgstr ""
+
+#: systemio.c:892
+msgid "Cannot copy full file name as name was not selected."
+msgstr ""
+
+#: systemio.c:828
+msgid "Cannot delete file as name was not selected."
+msgstr ""
+
+#: interface.c:2488
+msgid "Check this to allow"
+msgstr ""
+
+#: interface.c:458
+msgid "Clear History..."
+msgstr ""
+
+#: interface.c:1703
+msgid "Clear Search History"
+msgstr ""
+
+#: interface.c:1763
+msgid "Clear all directories in the \"Folders:\" drop-down list"
+msgstr ""
+
+#: interface.c:1751
+msgid "Clear all file names in the \"Files:\" drop-down list"
+msgstr ""
+
+#: interface.c:1757
+msgid "Clear all patterns in the \"Containing:\" drop-down list"
+msgstr ""
+
+#: interface.c:1754
+msgid "Clear containing text"
+msgstr ""
+
+#: interface.c:1748
+msgid "Clear file names"
+msgstr ""
+
+#: interface.c:1760
+msgid "Clear look in history"
+msgstr ""
+
+#: interface.c:771
+msgid "Click here to see all search options ..."
+msgstr ""
+
+#: interface.c:1089
+msgid "Click here to set-up size and date search options ..."
+msgstr ""
+
+#: interface.c:2443
+msgid "Configuration"
+msgstr ""
+
+#: savestate.c:79
+msgid ""
+"Configuration files are for a different version of Searchmonkey. This may "
+"cause errors. Delete old configuration files?"
+msgstr ""
+
+#: interface.c:3180
+msgid "Containing Text Export Criteria"
+msgstr ""
+
+#: interface.c:2998
+msgid "Containing Text import"
+msgstr ""
+
+#: interface.c:661
+msgid "Containing:"
+msgstr ""
+
+#: callbacks.c:1104
+msgid "Context Expression Wizard"
+msgstr ""
+
+#: interface.c:2248
+msgid "Convert Internals"
+msgstr ""
+
+#: interface.c:3376
+msgid "Copyright (c) 2006-2018 Adam Cottrell"
+msgstr ""
+
+#: support.c:90 support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: interface.c:2156
+msgid "Creates a new row in the list with the following rule."
+msgstr ""
+
+#: interface.c:2668
+msgid "Csv Export"
+msgstr ""
+
+#: interface.c:2741
+msgid "Current Config file location:"
+msgstr ""
+
+#: interface.c:3607 misc.c:126
+msgid "Day(s)"
+msgstr ""
+
+#: interface.c:2603
+msgid "Default Applications"
+msgstr ""
+
+#: interface.c:2518
+msgid "Default folder explorer:"
+msgstr ""
+
+#: interface.c:2513
+msgid "Default text editor:"
+msgstr ""
+
+#: interface.c:2523
+msgid "Default web browser:"
+msgstr ""
+
+#: interface.c:2170
+msgid "Delete"
+msgstr ""
+
+#: interface.c:2174
+msgid "Deletes an existing row in the rule table."
+msgstr ""
+
+#: interface.c:239
+msgid "Desktop search to replace find and grep."
+msgstr ""
+
+#: regexwizard.c:100
+msgid "Did not match any."
+msgstr ""
+
+#: interface.c:2273
+msgid "Discard any changes."
+msgstr ""
+
+#: interface.c:1034 interface.c:1072
+msgid "Displays the matching text lines when the result is selected."
+msgstr ""
+
+#: interface.c:2054 interface.c:2103 interface.c:2198
+msgid "Don't know"
+msgstr ""
+
+#: interface.c:2144
+msgid ""
+"Each row creates a new part to the rule, with the order reflecting the order "
+"in which the rule is to be matched."
+msgstr ""
+
+#: interface.c:1569
+msgid "Edit (File)"
+msgstr ""
+
+#: interface.c:328
+msgid "Edit File"
+msgstr ""
+
+#: interface.c:2628
+msgid "End of row separator:"
+msgstr ""
+
+#: savestate.c:161
+#, c-format
+msgid "Error saving %s: %s\n"
+msgstr ""
+
+#: callbacks.c:1631
+msgid "Error! Invalid 'containing text' regular expression"
+msgstr ""
+
+#: callbacks.c:1607
+msgid "Error! Invalid 'file name' regular expression"
+msgstr ""
+
+#: search.c:1910
+msgid "Error! Invalid Containing Text regular expression"
+msgstr ""
+
+#: search.c:1904
+msgid "Error! Invalid File Name regular expression"
+msgstr ""
+
+#: misc.c:576 search.c:1885
+msgid "Error! Look In directory cannot be blank."
+msgstr ""
+
+#: misc.c:587 search.c:1896
+msgid "Error! Look In directory is invalid."
+msgstr ""
+
+#: systemio.c:352 systemio.c:461
+msgid "Error! No valid file selected."
+msgstr ""
+
+#: systemio.c:429
+msgid "Error! Unable to find first combo entry. Is drop down list blank?"
+msgstr ""
+
+#: callbacks.c:1179
+#, c-format
+msgid "Error! Unable to remove config file %s.\n"
+msgstr ""
+
+#: systemio.c:405
+msgid ""
+"Error! You must select at least one entry in order to save drop down list."
+msgstr ""
+
+#: interface.c:3121
+msgid "Export Criteria"
+msgstr ""
+
+#: interface.c:2028
+msgid "Expression Wizard"
+msgstr ""
+
+#: interface.c:2470
+msgid ""
+"Extended regular expressions are recommended as they provide more "
+"functionality."
+msgstr ""
+
+#: interface.c:505
+msgid "Extras"
+msgstr ""
+
+#: callbacks.c:1102
+msgid "File Expression Wizard"
+msgstr ""
+
+#: interface.c:3173
+msgid "File Name Export criteria"
+msgstr ""
+
+#: interface.c:2991
+msgid "File Name import"
+msgstr ""
+
+#: interface.c:2969 interface.c:3150
+msgid "File Selection"
+msgstr ""
+
+#: interface.c:2546
+#, c-format
+msgid "File explorer attributes: %f=filename, %d=directory"
+msgstr ""
+
+#: systemio.c:152
+msgid "File name"
+msgstr ""
+
+#: systemio.c:154
+msgid "File size"
+msgstr ""
+
+#: systemio.c:155
+msgid "File type"
+msgstr ""
+
+#: systemio.c:331
+msgid "File was empty/invalid."
+msgstr ""
+
+#: interface.c:2583
+msgid "Find default executables:"
+msgstr ""
+
+#: interface.c:829
+msgid "Follow Symbol _Links"
+msgstr ""
+
+#: interface.c:832
+msgid "Follow Symbolic Links (Only on systems that support them)"
+msgstr ""
+
+#: interface.c:2481
+msgid "Force a prompt before any files are deleted"
+msgstr ""
+
+#: interface.c:2476
+msgid "Force a prompt before settings are saved."
+msgstr ""
+
+#: interface.c:2462
+msgid "Force single window mode"
+msgstr ""
+
+#: regexwizard.c:104
+#, c-format
+msgid "Found %d matches."
+msgstr ""
+
+#: regexwizard.c:102
+msgid "Found 1 match."
+msgstr ""
+
+#: interface.c:3716 interface.c:3742 misc.c:164
+msgid "Gb"
+msgstr ""
+
+#: interface.c:2491
+msgid "Global Settings"
+msgstr ""
+
+#: interface.c:3024
+msgid "Grep style file (1-entry, OR each line)"
+msgstr ""
+
+#: interface.c:2267
+msgid "Help with the Regular Expression Builder"
+msgstr ""
+
+#: interface.c:984
+msgid "Highlights per line :"
+msgstr ""
+
+#: interface.c:369
+msgid "Horizontal results"
+msgstr ""
+
+#: interface.c:951
+msgid ""
+"If active, display extra lines around the matching line to help show context "
+"of match."
+msgstr ""
+
+#: interface.c:826
+msgid "Ignore hidden files (Unix filesystems only)"
+msgstr ""
+
+#: systemio.c:498
+#, c-format
+msgid ""
+"Illegal escape sequence: '\\%c'.\n"
+" Valid escape characters are: b n r t \" \\"
+msgstr ""
+
+#: interface.c:2941
+msgid "Import Criteria"
+msgstr ""
+
+#: interface.c:3001 interface.c:3034 interface.c:3216
+msgid "Import a file identical to that generated by the export command."
+msgstr ""
+
+#: systemio.c:516
+#, c-format
+msgid ""
+"Input string expands into non ASCII, or multi-byte key sequence: '%s'.\n"
+" Please try to use ASCII safe keys"
+msgstr ""
+
+#: callbacks.c:751
+msgid "Internal Error! Unable to find calling wizard type!"
+msgstr ""
+
+#: interface.c:813
+msgid "Invert Search Expression"
+msgstr ""
+
+#: interface.c:816
+msgid "Inverts the file name search results i.e. find all becomes find none."
+msgstr ""
+
+#: interface.c:3209
+msgid "Just save the currently displayed entry to a file."
+msgstr ""
+
+#: interface.c:3714 interface.c:3740 misc.c:160
+msgid "Kb"
+msgstr ""
+
+#: interface.c:3723
+msgid "Less than:"
+msgstr ""
+
+#: interface.c:972
+msgid "Limit Content Highlighting"
+msgstr ""
+
+#: interface.c:924
+msgid "Limit Match Files"
+msgstr ""
+
+#: interface.c:918
+msgid "Limit files found by selecting maximum tree-depth to search."
+msgstr ""
+
+#: savestate.c:1816 savestate.c:1880
+#, c-format
+msgid "Line Number: %d\n"
+msgstr ""
+
+#: interface.c:958
+msgid "Lines Displayed:"
+msgstr ""
+
+#: interface.c:1013 interface.c:1051
+msgid "List of file(s) corresponding to research criteria."
+msgstr ""
+
+#: savestate.c:722 systemio.c:153
+msgid "Location"
+msgstr ""
+
+#: interface.c:2749
+msgid "Location of your current searchmonkey configuration settings file."
+msgstr ""
+
+#: interface.c:417
+msgid "Mat_ches"
+msgstr ""
+
+#: interface.c:818 interface.c:872
+msgid "Match Case"
+msgstr ""
+
+#: interface.c:2484
+msgid "Match strings within binary files too"
+msgstr ""
+
+#: savestate.c:758
+msgid "Matches"
+msgstr ""
+
+#: interface.c:934
+msgid "Maximum Hits:"
+msgstr ""
+
+#: interface.c:3704
+msgid "Maximum filesize in kBytes/mBytes/gBytes."
+msgstr ""
+
+#: interface.c:3715 interface.c:3741 misc.c:162
+msgid "Mb"
+msgstr ""
+
+#: interface.c:3731
+msgid "Minimum filesize in kBytes/mBytes/gBytes."
+msgstr ""
+
+#: savestate.c:749
+msgid "Modified"
+msgstr ""
+
+#: systemio.c:156
+msgid "Modified date"
+msgstr ""
+
+#: interface.c:2168
+msgid "Modifies an existing row in the rule table."
+msgstr ""
+
+#: interface.c:2164
+msgid "Modify"
+msgstr ""
+
+#: interface.c:3609 misc.c:128
+msgid "Month(s)"
+msgstr ""
+
+#: interface.c:3696
+msgid "More than:"
+msgstr ""
+
+#: systemio.c:528
+#, c-format
+msgid ""
+"Multi-byte string entered: '%s'.\n"
+"Truncating extra character (%c)"
+msgstr ""
+
+#: main.c:70 misc.c:166
+msgid "N/A"
+msgstr ""
+
+#: savestate.c:713
+msgid "Name"
+msgstr ""
+
+#: systemio.c:221
+msgid "No results to save!"
+msgstr ""
+
+#: interface.c:2078 interface.c:2127 interface.c:2222
+msgid "Once"
+msgstr ""
+
+#: interface.c:2079 interface.c:2128 interface.c:2223
+msgid "One or more times"
+msgstr ""
+
+#: interface.c:336
+msgid "Open Folder"
+msgstr ""
+
+#: interface.c:3043 interface.c:3225
+msgid "Options"
+msgstr ""
+
+#: savestate.c:1922
+msgid "Options: "
+msgstr ""
+
+#: interface.c:302
+msgid "P_rint Setup..."
+msgstr ""
+
+#: savestate.c:1814
+#, c-format
+msgid "Paragraph Number: %d\n"
+msgstr ""
+
+#: interface.c:2566
+msgid "Paste and edit full file name of your preferred file explorer."
+msgstr ""
+
+#: interface.c:2560
+msgid "Paste and edit full file name of your preferred text editor."
+msgstr ""
+
+#: interface.c:2572
+msgid "Paste and edit full file name of your preferred web browser."
+msgstr ""
+
+#: interface.c:870
+msgid ""
+"Perform content searching immediately so that results are returned quicker."
+msgstr ""
+
+#: search.c:2085 search.c:2179
+#, c-format
+msgid "Phase 1 searching %s"
+msgstr ""
+
+#: search.c:2420
+#, c-format
+msgid "Phase 2 searching %s"
+msgstr ""
+
+#: search.c:2301
+msgid "Phase 2 starting..."
+msgstr ""
+
+#: interface.c:3313
+msgid ""
+"Please be patient!\n"
+"\n"
+"Searching for executables to perform the following functions:\n"
+"  * text editing/viewing\n"
+"  * folder browsing\n"
+"  * web browsing\n"
+"\n"
+"The search algorithm uses a set of standard executables for all systems, and "
+"then attempts to find them on your local disk.\n"
+"\n"
+"Once complete, press OK to store the executables."
+msgstr ""
+
+#: savestate.c:1860
+msgid "Please email all debug text to cottrela@users.sf.net.\n"
+msgstr ""
+
+#: interface.c:3321
+msgid "Please wait..."
+msgstr ""
+
+#: interface.c:675
+msgid ""
+"Please, type here a word or a segment of a word researched in the file(s).\n"
+"Don't type spaces."
+msgstr ""
+
+#: interface.c:644
+msgid ""
+"Please, type here the name or a segment of the name of the file(s).\n"
+"Don't type spaces."
+msgstr ""
+
+#: interface.c:2081 interface.c:2130 interface.c:2225
+msgid "Possibly once"
+msgstr ""
+
+#: interface.c:3363
+msgid "Programming:"
+msgstr ""
+
+#: interface.c:3363
+msgid "Project Manager:"
+msgstr ""
+
+#: interface.c:2478
+msgid "Prompt before deleting files"
+msgstr ""
+
+#: interface.c:2473
+msgid "Prompt before saving state"
+msgstr ""
+
+#: interface.c:3610
+msgid "Quarter(s)"
+msgstr ""
+
+#: savestate.c:897
+msgid "Ready-research mode with RegEx"
+msgstr ""
+
+#: savestate.c:895
+msgid "Ready-research mode with jokers(DOS like)"
+msgstr ""
+
+#: interface.c:732
+msgid "Recurse Folders"
+msgstr ""
+
+#: interface.c:3378
+msgid ""
+"Regular expression power search utility written in GTK+ and licensed under "
+"GPL v.3"
+msgstr ""
+
+#: interface.c:561
+msgid "Release _Notes"
+msgstr ""
+
+#: interface.c:2690
+msgid "Remove all saved settings (restart required to complete):"
+msgstr ""
+
+#: interface.c:2706
+msgid "Reset all"
+msgstr ""
+
+#: interface.c:1766
+msgid "Reset size/modified options"
+msgstr ""
+
+#: interface.c:1769
+msgid "Reset the size and modified search criteria."
+msgstr ""
+
+#: interface.c:915
+msgid "Restrict depth:"
+msgstr ""
+
+#: systemio.c:660
+#, c-format
+msgid ""
+"Run configuration to set default directory/folder browser:\n"
+"\"%s\""
+msgstr ""
+
+#: systemio.c:647
+#, c-format
+msgid ""
+"Run configuration to set default text editor:\n"
+"\"%s\""
+msgstr ""
+
+#: systemio.c:634
+#, c-format
+msgid ""
+"Run configuration to set default web-browser:\n"
+"\"%s\""
+msgstr ""
+
+#: interface.c:385
+msgid "S_ort by"
+msgstr ""
+
+#: interface.c:283
+msgid "Save R_esults to CSV..."
+msgstr ""
+
+#: interface.c:3206
+msgid "Save active/displayed entry only"
+msgstr ""
+
+#: interface.c:3213
+msgid "Save all entries (1-entry per line)"
+msgstr ""
+
+#: interface.c:2731
+msgid "Save now"
+msgstr ""
+
+#: interface.c:2872
+msgid "Save results to CSV file..."
+msgstr ""
+
+#: interface.c:2718
+msgid "Save settings immediately (normally occurs on exit):"
+msgstr ""
+
+#: interface.c:3183
+msgid "Save the Containing Text drop down entries into a file."
+msgstr ""
+
+#: interface.c:3176
+msgid "Save the File Name drop down entries into a file."
+msgstr ""
+
+#: interface.c:3318
+msgid "Search progress"
+msgstr ""
+
+#: interface.c:1132
+msgid "Search progress bar."
+msgstr ""
+
+#: interface.c:2776 interface.c:2782 interface.c:3331 interface.c:3338
+msgid "Searching for system files, please wait..."
+msgstr ""
+
+#: search.c:1920
+#, c-format
+msgid "Searchmonkey : search in %s/"
+msgstr ""
+
+#: interface.c:3365
+msgid "Searchmonkey logos + main icon :"
+msgstr ""
+
+#: interface.c:3031
+msgid "Searchmonkey style (1-entry per line)"
+msgstr ""
+
+#: interface.c:3417
+msgid "Select Date..."
+msgstr ""
+
+#: interface.c:1670
+msgid "Select Font"
+msgstr ""
+
+#: interface.c:1516
+msgid "Select a folder"
+msgstr ""
+
+#: interface.c:1651
+msgid "Select highlighting Colour"
+msgstr ""
+
+#: interface.c:466
+msgid "Settings"
+msgstr ""
+
+#: interface.c:948
+msgid "Show Line Contents"
+msgstr ""
+
+#: interface.c:359
+msgid "Show _Statusbar"
+msgstr ""
+
+#: misc.c:95 misc.c:132
+msgid "Since "
+msgstr ""
+
+#: savestate.c:731
+msgid "Size"
+msgstr ""
+
+#: interface.c:2251
+msgid ""
+"Some characters (such as . | ^ $) are reserved in certain circumstances.\n"
+"\n"
+"If you know what you are doing with these characters, unselect this checkbox."
+msgstr ""
+
+#: interface.c:2060 interface.c:2109 interface.c:2204
+msgid "Space(s)"
+msgstr ""
+
+#: interface.c:976
+msgid ""
+"Specify the maximum number of content matches within each file to show. Does "
+"not limit the number of files to search."
+msgstr ""
+
+#: interface.c:927
+msgid ""
+"Specify the maximum number of matching files found. Does not limit the "
+"number of content matches within each file."
+msgstr ""
+
+#: interface.c:430
+msgid "Start"
+msgstr ""
+
+#: interface.c:612
+msgid "Start the search!"
+msgstr ""
+
+#: interface.c:441
+msgid "Stop"
+msgstr ""
+
+#: interface.c:621
+msgid "Stop the search!"
+msgstr ""
+
+#: interface.c:2753
+msgid "System"
+msgstr ""
+
+#: interface.c:1840
+msgid "Test Regular Expression"
+msgstr ""
+
+#: interface.c:539
+msgid "Test Regular Expression..."
+msgstr ""
+
+#: interface.c:2655
+msgid "Text delimiter:"
+msgstr ""
+
+#: interface.c:2539 interface.c:2553
+#, c-format
+msgid "Text editor attributes: %f=filename, %d=directory"
+msgstr ""
+
+#: interface.c:2056 interface.c:2105 interface.c:2200
+msgid "The character"
+msgstr ""
+
+#: interface.c:2059 interface.c:2108 interface.c:2203
+msgid "The phrase"
+msgstr ""
+
+#: interface.c:2244
+msgid "This is the expression that will be copied back to the main screen."
+msgstr ""
+
+#: interface.c:1907
+msgid ""
+"To see the results of your regular expression click apply. Once done, simply "
+"close the window. Searches are case sensitive.\n"
+"\n"
+"<b>Note:</b> this tool will highlight <i>each</i> match(es) found."
+msgstr ""
+
+#: misc.c:103 misc.c:143
+msgid "Today"
+msgstr ""
+
+#: interface.c:3385
+msgid "Translators credits"
+msgstr ""
+
+#: savestate.c:740
+msgid "Type"
+msgstr ""
+
+#: search.c:2747
+msgid "Unknown"
+msgstr ""
+
+#: interface.c:2158
+msgid "Update"
+msgstr ""
+
+#: interface.c:2162
+msgid "Updates a rule that was selected for the modify function."
+msgstr ""
+
+#: interface.c:2662
+msgid "Use ASCII characters e.g. \" # $ '"
+msgstr ""
+
+#: interface.c:2648
+msgid "Use ASCII or C style construct e.g. , \\t ;"
+msgstr ""
+
+#: interface.c:2635
+msgid "Use ASCII or C style construct e.g. \\n"
+msgstr ""
+
+#: interface.c:867
+msgid "Use Single Phase Search"
+msgstr ""
+
+#: interface.c:838
+msgid "Use Wil_dcard Syntax"
+msgstr ""
+
+#: interface.c:845 interface.c:889
+msgid "Use _Regular Expression Syntax"
+msgstr ""
+
+#: interface.c:486
+msgid "Use _Word Wrap"
+msgstr ""
+
+#: interface.c:2467
+msgid "Use extended regular expressions"
+msgstr ""
+
+#: interface.c:848 interface.c:892
+msgid "Use regular expression syntax in file search criteria."
+msgstr ""
+
+#: interface.c:881
+msgid "Use simple search syntax"
+msgstr ""
+
+#: interface.c:875
+msgid "Use strict contents case matching."
+msgstr ""
+
+#: interface.c:821
+msgid "Use strict file case matching."
+msgstr ""
+
+#: interface.c:2994 interface.c:3027
+msgid "Use the file in an identical to way to that of the grep -f command."
+msgstr ""
+
+#: interface.c:688
+msgid "Use the wizard to create a containing text regular expression..."
+msgstr ""
+
+#: interface.c:658
+msgid "Use the wizard to create a file name regular expression..."
+msgstr ""
+
+#: interface.c:3605
+msgid "Use this option to choose the date units."
+msgstr ""
+
+#: interface.c:3712 interface.c:3738
+msgid "Use this option to choose the file size units."
+msgstr ""
+
+#: interface.c:664
+msgid ""
+"Use this option to restrict your search results to files containing the "
+"provided text (or pattern)."
+msgstr ""
+
+#: interface.c:3699
+msgid ""
+"Use this option to restrict your search results to files that are bigger "
+"than the provided number of kilo Bytes."
+msgstr ""
+
+#: interface.c:3726
+msgid ""
+"Use this option to restrict your search results to files that are smaller "
+"than the provided number of kilo Bytes."
+msgstr ""
+
+#: interface.c:735
+msgid "Use this option to search all subfolders (recursively)."
+msgstr ""
+
+#: interface.c:841 interface.c:885
+msgid "Use wildcard or glob syntax for file search criteria. E.g. *.txt"
+msgstr ""
+
+#: interface.c:2641
+msgid "Value/field separator:"
+msgstr ""
+
+#: interface.c:375
+msgid "Vertical results"
+msgstr ""
+
+#: interface.c:3608 misc.c:127
+msgid "Week(s)"
+msgstr ""
+
+#: interface.c:3611 misc.c:129
+msgid "Year(s)"
+msgstr ""
+
+#: interface.c:2080 interface.c:2129 interface.c:2224
+msgid "Zero or more times"
+msgstr ""
+
+#: interface.c:2664
+msgid "\\\""
+msgstr ""
+
+#: interface.c:2637
+msgid "\\n"
+msgstr ""
+
+#: interface.c:3536
+msgid "_Any date"
+msgstr ""
+
+#: interface.c:344 interface.c:1577
+msgid "_Copy (Filename)"
+msgstr ""
+
+#: interface.c:320
+msgid "_Delete (File)"
+msgstr ""
+
+#: interface.c:1585
+msgid "_Delete File"
+msgstr ""
+
+#: interface.c:313
+msgid "_Edit"
+msgstr ""
+
+#: interface.c:1593
+msgid "_Explore Folder"
+msgstr ""
+
+#: interface.c:523
+msgid "_Export Regular Expression..."
+msgstr ""
+
+#: interface.c:260
+msgid "_File"
+msgstr ""
+
+#: interface.c:392
+msgid "_File Name"
+msgstr ""
+
+#: interface.c:565
+msgid "_Forums"
+msgstr ""
+
+#: interface.c:3547
+msgid "_From :"
+msgstr ""
+
+#: interface.c:543
+msgid "_Help"
+msgstr ""
+
+#: interface.c:823
+msgid "_Ignore files beginning with '.'"
+msgstr ""
+
+#: interface.c:512
+msgid "_Import Regular Expression..."
+msgstr ""
+
+#: interface.c:3557
+msgid "_Interval :"
+msgstr ""
+
+#: interface.c:397
+msgid "_Location"
+msgstr ""
+
+#: interface.c:412
+msgid "_Modified"
+msgstr ""
+
+#: interface.c:267
+msgid "_New Instance"
+msgstr ""
+
+#: interface.c:423
+msgid "_Search"
+msgstr ""
+
+#: interface.c:3562
+msgid "_Since :"
+msgstr ""
+
+#: interface.c:402
+msgid "_Size"
+msgstr ""
+
+#: interface.c:557
+msgid "_Support"
+msgstr ""
+
+#: interface.c:3541
+msgid "_Today"
+msgstr ""
+
+#: interface.c:407
+msgid "_Type"
+msgstr ""
+
+#: interface.c:3552
+msgid "_Until :"
+msgstr ""
+
+#: interface.c:550
+msgid "_User Guide"
+msgstr ""
+
+#: interface.c:352
+msgid "_View"
+msgstr ""
+
+#: savestate.c:1937
+msgid "case sensitive; "
+msgstr ""
+
+#: savestate.c:1946
+#, c-format
+msgid "display %d extra lines around match; "
+msgstr ""
+
+#: savestate.c:1943
+msgid "display 1 extra line around match; "
+msgstr ""
+
+#: callbacks.c:386
+msgid "http://searchmonkey.embeddediq.com/index.php/contribute"
+msgstr ""
+
+#: callbacks.c:394
+msgid "http://searchmonkey.embeddediq.com/index.php/support"
+msgstr ""
+
+#: callbacks.c:1209
+msgid "http://searchmonkey.embeddediq.com/index.php/support/index"
+msgstr ""
+
+#: callbacks.c:758
+msgid ""
+"http://searchmonkey.sourceforge.net/index.php/Regular_expression_builder"
+msgstr ""
+
+#: callbacks.c:441
+msgid "http://sourceforge.net/forum/?group_id=175143"
+msgstr ""
+
+#: callbacks.c:1159
+msgid ""
+"https://sourceforge.net/projects/searchmonkey/files/gSearchmonkey%20GTK"
+"%20%28Gnome%29/0.8.2%20%5Bstable%5D/"
+msgstr ""
+
+#: savestate.c:1965
+msgid "none"
+msgstr ""
+
+#: savestate.c:1959
+#, c-format
+msgid "only showing first %d content matches; "
+msgstr ""
+
+#: savestate.c:1956
+msgid "only showing first content match; "
+msgstr ""
+
+#: savestate.c:1950
+msgid "only showing line numbers; "
+msgstr ""
+
+#: callbacks.c:1445
+msgid "research mode with RegEx"
+msgstr ""
+
+#: callbacks.c:1442
+msgid "research mode with jokers(DOS like)"
+msgstr ""
+
+#: interface.c:1883
+msgid "sample"
+msgstr ""
+
+#: interface.c:240
+msgid "searchmonkey"
+msgstr ""
+
+#: interface.c:2070 interface.c:2119 interface.c:2214
+msgid "that occurs"
+msgstr ""

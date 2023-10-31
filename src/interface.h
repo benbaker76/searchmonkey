@@ -17,4 +17,7 @@ GtkWidget* create_exportCriteria (void);
 GtkWidget* create_autoComplete (void);
 GtkWidget* create_aboutSearchmonkey (void);
 GtkWidget* create_creditsDialog (void);
-GtkWidget* create_calendarDialog (void);
+GtkWidget* create_calendarDialog (GtkWidget *win);
+GtkWidget *createDialogFileSize(void);
+GtkWidget *createDialogFileDateModified(const gchar *str);
+

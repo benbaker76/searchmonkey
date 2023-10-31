@@ -896,7 +896,7 @@ void copyFile(GtkWidget *widget)
   }  
 }
 
-gint check_bom(const char *data, size_t size)
+gint check_bom(const char *data, gint size)
 {
     if (size >= 3) {
         if (memcmp(data, UTF_8_BOM, 3) == 0)
@@ -941,41 +941,34 @@ gboolean g_file_get_contents2 (const gchar *filename,
   gint sBOM;
   
   retVal = g_file_get_contents(filename, contents, length, error);
-  /* now me must check if is it a valid UTF8 string ! Luc A Feb 2018 */
- 
-  if (g_utf8_validate (*contents, *length, NULL)){
-                return TRUE;
-      }
-  else{/* the text isn't encoded in UTF8 - Luc A deb 2018 */
-         sBOM= check_bom(*contents,(intptr_t)length );
-         /* we're trying to get a valid charset */
-         /* if sBOM == NULL then isn't a UTF string, thus probablu an ISO */
-         /*  encoding = "ISO-8859-15" by default */
-         switch(sBOM)
-         {
-          case 0:
+
+  sBOM= check_bom(*contents,*length );
+  /* we're trying to get a valid charset */
+  /* i's a weird alchemy : sometimes, for example INSIDE an ODT file, we can find
+     sections UTF-8 compliant, and others not, dus to user's copy/paste */
+// printf("sBOM =%d length =%d\n", sBOM, *length);
+  if (*length==0) 
+     return retVal;
+  switch(sBOM)
+   {
+         case 0:/* tricky part - Linux seems unable to distinguish between utf8 and USo somestimes */
           {
-             retContents = g_convert_with_fallback (*contents, *length, "UTF-8", "ISO-8859-1",
-                                           NULL, &bytes_read, &bytes_written, error);
-            if ((retContents == NULL)||(error)) {
-                  *contents = NULL;
-                  *length = 0;
-                  retVal = FALSE;
-                }
-             else {
-                    g_free(*contents);    
-                    *contents = retContents;
-                    *length = bytes_written;
-                    retVal = TRUE;
-                  }
+            if (g_utf8_validate (*contents, *length, NULL)){
+                   retVal = TRUE;
+              }
+            else
+             {/* windows 1252 if a better choice than ISO-8859, wider can't predict so removed */
+            retVal =FALSE;
+              }
             break;
+
           }
          case 2:
           {
              retContents = g_convert_with_fallback (*contents, *length, "UTF-8", "UTF-32",
                                            NULL, &bytes_read, &bytes_written, error);
-
              if ((retContents == NULL)||(error)) {
+                  g_free(*contents);
                   *contents = NULL;
                   *length = 0;
                   retVal = FALSE;
@@ -989,12 +982,12 @@ gboolean g_file_get_contents2 (const gchar *filename,
              break;
             } 
           case 4:
-            {
-            
+            {            
              retContents = g_convert_with_fallback (*contents, *length, "UTF-8", "UTF-16",
                                            NULL, &bytes_read, &bytes_written, error);
 
              if ((retContents == NULL)||(error)) {
+                  g_free(*contents);
                   *contents = NULL;
                   *length = 0;
                   retVal = FALSE;
@@ -1006,12 +999,9 @@ gboolean g_file_get_contents2 (const gchar *filename,
                     retVal = TRUE;
                   }
             } 
-         }/* end switch */
-         /* in other cases, we return Error - i.e empry string */
-       }/* else NOT UTF8 */
-  // printf("++++ je suis dans g_file_contents2() ****\n");
-  return retVal;
-  /* Remove unknown ASCII */
+   }/* end switch */
+  /* in other cases, we return Error - i.e empry string */
+  return retVal;  /* Remove unknown ASCII */
 /* bugged : remove all accented chars in modern Linux, so i've commented, but leaved the code for documentation
 Luc A., 29 dec 2017
   if (retVal) {

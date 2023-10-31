@@ -1,0 +1,79 @@
+Release : 0.8.3.3
+
+1. Bugs
+-------------
+1.1 Fixed
+---------
+1.1.1- when the size of text preview is too large, the highlighting is misplaced - this bug is known by Adam : DONE
+1.1.2- word wrapping isn't effective : DONE
+1.1.3- all advanced options (expert mode) aren't sometimes effective ; why ? Because if the notebook isn't opened on position #2, those options are inactives ! Now, even if notebook is in position #3, those options are ACTIVES. DONE
+1.1.4- sometimes, even if the option 'show line contents' activated, Searchmonkey show ONLY one line : DONE (seems linked to somewhat with wizard , if the wizard is activated, even for nothing, BEFORE research, the display is correct !)
+1.1.5- reactivated "limit content hits" options in notebook's option panel. DONE
+1.1.6- option 'simple search syntax' isn't activatable : reactivated. DONE
+1.1.7- when "extra lines" for "containing text search" is activated, the highlighting was misplaced : DONE
+1.1.8- found a "cool" bug mistmach between Kilo-bytes and Mega-bytes file size display : DONE
+1.1.9- isn't really a bug, but under /configuration>preferences  and systeme calls in dialog if we want that the web browser is called correctly, the correct syntax is (for example Firefox : /usr/bin/firefox   and the parameter only %f) ; fixed by remobe the "new-tab" string. DONE
+1.1.10- With the "Test Regular expressions" dialog, the highlighting is wrong (shifted) with accented chars (i.e. chars with more than ONE byte by char) ; it's not critical, but annoying. DONE
+
+1.2 Known
+---------
+
+- the config.ini file in saved with a mix of english and localized words ! : TODO
+- it isn't a true bug, but the install is imperfect : the  searchmonkey.desktop file from /rpmbuild source folder isn't correctly installed! : IN PROGRESS
+- is it a bug (found on Ubuntu 14.04 clean install ) : nothing happens with the first search until the user make choices ??? TODO
+- remains CORE DUMPED crashes ; probably related to GtkIter checking with accented chars ? IN PROGRESS
+- With the "Test Regular expressions" dialog, the "sample text" area isn't re-initialized IF we don't close this dialog, so the test (by highlighting) is sometimes wrong, because the highlighting remains in the "sample text" (or we have done a copy/padte from system's clipboard). TODO
+
+2. Improvements
+---------------
+2.1 Done
+--------
+1- changed application's icons to a more "flat" style : DONE
+- remove all deprecated symbols and function inside Gtk (widgets)  (compatible with gtk >=2.24) : DONE
+- modify main window title acording to user's research : DONE
+- now the searched containing text is really highlighted with a yellow backgound : DONE
+5- the color dialog now changes the BACKGROUND color for highlighting, like a 'Stabilo pen' : DONE
+- choosed word justify in preview at "left justify" : DONE
+- added PDF file parsing, recquires libpoppler : DONE
+- added support to parse doc-x files : DONE
+- added support to parse ODT files : DONE
+10- allow Searchmonkey to be launched with arguments, like this : searchmonkey -d {directory} -f {filename} -t {containing text} ;  then the app opens at this directory but user must clicks itself to launch search.  Example : searchmonkey -d /home/tux -f txt -t linux will open searchmonkey configured to scan directory '/home/tux' to search files containing in their names 'txt' and search inside files the string 'linux'. ONE to THREE parameters (-d and/or -t and/or -f) are allowed. Of course -? display help ! DONE
+- added combo box in order to choose the scale of file size between Kb/Mb/Gb : DONE
+- added code to allow "limit content hits" to be functional : I've wrote the code, now Searchmonket highlights ONLY the 'n' first hits as user requested. DONE
+- Several Dialogs are now in kind of "Mac" (user-friendly) style with icons. DONE
+14- completed french & russian translation : DONE (russian should be better ;-))
+
+- polished various parts of the GUI : TODO/in PROGRESS
+- allow Searchmonkey to be launched via "actions" with PCManFM : PROGRESS, but we have to modify install scripts, the 'action' works. In other case, please install manually the file 'searchmonkey-action.desktop' found in /data directory to you user hidden directory : ~/.local/share/file-manager/actions/
+- add support to parse ODS and XLS-X files : in PROGRESS (very easy to do, but isn't useful if the preview can't display a kind of spreadsheet ...)
+
+
+2.2 Todo
+--------
+
+- add RTF file parsing : TODO
+- add MIME types management : TODO in 0.8.4
+- add intellgent research switching by using of MIME types : TODO in 0.8.4
+- add vocal assistance with espeak : TODO ???
+- add support to indexed research with 'locate' and system index data base : TODO ???
+- change name for "test regular expression" dialog (c'est un 'bac à sable') : TODO ????
+- allow Searchmonkey to be launched via "actions" in Thunar and PCManFM : TODO
+- remove all deprecated symbols and function about 'threads' (compatible with gtk >=2.32 until gtk 3.6) : TODO
+- remove all deprecated symbols and function about 'g_static_mutex' (compatible with gtk >=2.32) : TODO
+
+3. Modification installation scripts
+-------------------------------------
+3.1 DONE
+--------
+- modified script according to new release reference : TODO
+- modified Configure script by adding "libzip " in pkg configuration : DONE
+- modified Configure script by adding "poppler-glib " in pkg configuration : DONE
+- modified script to install new language files(translations) : TODO (for russian)
+- added various new icons : DONE
+- modify scripts to install a searchmonkey.desktop file compatible with OpenDesktop specs : TODO
+
+3.2 TODO by the USER
+---------------------
+PLease, when compiling under some Linux Distros, remember to change rights of configure and makefile files in source installation folder to "executable".
+
+

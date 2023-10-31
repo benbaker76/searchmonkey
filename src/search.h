@@ -18,7 +18,7 @@ extern GtkWidget *mainWindowApp; /* Holds pointer to the main searchmonkey GUI. 
 /* added by Luc A. - 1 janv 2018 - idea here : answer #22 URL = https://stackoverflow.com/questions/4014827/best-way-to-switch-on-a-string-in-c
  please note that FORMAT_OTHERS must be equal to MAX_FORMAT_LIST !!!!
 */
-#define FORMAT_OTHERS 47
+#define FORMAT_OTHERS 50
 #define FORMAT_TXT 1
 #define FORMAT_OFFICE_TEXT 2
 #define FORMAT_OFFICE_SHEET 3
@@ -62,10 +62,12 @@ extern GtkWidget *mainWindowApp; /* Holds pointer to the main searchmonkey GUI. 
 #define FORMAT_CSS 41
 #define FORMAT_TGZ 42
 #define FORMAT_XPM 43
-#define MAX_FORMAT_LIST 47
+ 
+#define MAX_FORMAT_LIST 50
 /*
  * Global/miscillaneous constants
  */
+#define MAX_FILE_SIZE_PHASE_TWO 134217728 /* 128 mega bytes - size limit for deep search in order to waste time with ISO videos ... */
 #define MAX_FILENAME_STRING 512 /* String maximum for things like the statusbar, and other fixed length buffers - minimise usage */
 #define TREEVIEW_HEADER_PIXEL_SIZE_Y 25 /* Treeview header size in pixels - on_treeview1_button_press_event() */
 #define SEARCHMONKEY_CONFIG "config.ini" /* Configuration name for searchmonkey options - main()*/
@@ -123,7 +125,8 @@ typedef struct { /* Structure to store each match result before being displayed 
   gchar *pLocation; /* pointer to the location */
   gchar *pMDate; /* pointer to the modified date */
   gchar *pFileSize; /* pointer to the file size */
-  gchar *pFileType; /* pointer to the file size */
+  gchar *pFileType; /* pointer to the file type */
+  gchar *pShortFileType; /* DOS style file type, for example .ODT */
   long int mDate; /* modified date as an integer */
   unsigned int fileSize; /* filesize as an integer */
 } textMatch;
@@ -149,6 +152,7 @@ typedef struct { /* Structure to store all results together */
   GStringChunk *fileSizeChunk; /* Mass storage for all of the file sizes */
   GStringChunk *mDateChunk; /* Mass storage for all of the modified dates */
   GStringChunk *fileTypeChunk; /* Mass storage for all of the file types */
+  GStringChunk *shortfileTypeChunk;/* Mass storage for all DOS style extensions - Luc A. March 2018 */
   GStringChunk *textMatchChunk; /* Mass storage for all of the matched lines */
   GtkListStore *store; /* Pointer to the data store */ 
   GtkTreeIter *iter; /* Malloc Iter */

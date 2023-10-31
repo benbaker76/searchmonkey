@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Action
+Tooltip=Research from this folder with Searchmonkey
+Tooltip[fr_FR]=Démarrer une recherche depuis ce dossier avec Searchmonkey
+Name=Open Search here
+Name[fr_FR]=Rechercher depuis ce dossier
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Exec=searchmonkey -d %d
+Name=Default profile
