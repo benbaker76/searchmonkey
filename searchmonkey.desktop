@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Searchmonkey
+Name[fr]=Recherche Searchmonkey
+Name[ru]=поиск с Searchmonkey
+Name[es]=Búsqueda Searchmonkey
+Comment=Deep search using regular expressions
+Comment[fr]=Recherche en profondeur grâce aux expressions régulières (RegEx)
+Comment[ru]=Углубленный поиск с регулярными выражениями(RegEX)
+Comment[es]=Búsqueda en profundidad con expresiones regulares (RegEx)
+Exec=searchmonkey
+Icon=searchmonkey
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=System;GTK
