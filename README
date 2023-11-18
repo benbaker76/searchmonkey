@@ -6,6 +6,7 @@ http://searchmonkey.sf.net/index.php/Searchmonkey_Installation
 
 
 For most systems simply run:
+ $ sudo patch -p1 -d /usr/local/bin < ./intltool-update.patch
  $ ./configure
  $ make
 If there are no errors reported by configure/make, as super user:
